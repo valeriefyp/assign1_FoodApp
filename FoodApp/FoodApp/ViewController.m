@@ -151,7 +151,14 @@ _mReciptStepViewController = _ReciptStepNavigationController.childViewController
                         NSString *title = [_FoodOtherKey objectAtIndex:i];
                         NSString *value = [_FoodOtherValue objectAtIndex:i];
                         NSString *combine;
-                        combine = [NSString stringWithFormat:@"%@ : %@ gram \n", title, value];
+                        if([title isEqualToString:@"Calories"]){
+                            combine = [NSString stringWithFormat:@"%@ : %@ \n", title, value];
+
+                        }else if([title isEqualToString:@"Potassium"] || [title isEqualToString:@"Sodium"] || [title isEqualToString:@"Cholesterol"]){
+                            combine = [NSString stringWithFormat:@"%@ : %@ mg \n", title, value];
+                        }else{
+                            combine = [NSString stringWithFormat:@"%@ : %@ g \n", title, value];
+                        }
                         finalText = [NSString stringWithFormat:@"%@ %@", finalText, combine];
                     }else{
                         //last object
@@ -159,7 +166,14 @@ _mReciptStepViewController = _ReciptStepNavigationController.childViewController
                             NSString *title = [_FoodOtherKey objectAtIndex:i];
                             NSString *value = [_FoodOtherValue objectAtIndex:i];
                             NSString *combine;
-                            combine = [NSString stringWithFormat:@"%@ : %@", title, value];
+                            if([title isEqualToString:@"Calories"]){
+                                combine = [NSString stringWithFormat:@"%@ : %@ ", title, value];
+
+                            }else if([title isEqualToString:@"Potassium"] || [title isEqualToString:@"Sodium"] || [title isEqualToString:@"Cholesterol"]){
+                                combine = [NSString stringWithFormat:@"%@ : %@ mg ", title, value];
+                            }else{
+                                combine = [NSString stringWithFormat:@"%@ : %@ g  ", title, value];
+                            }
                             finalText = [NSString stringWithFormat:@"%@ %@", finalText, combine];
                         }
                     }

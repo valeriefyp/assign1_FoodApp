@@ -61,14 +61,14 @@
                 NSNumber *totalSatFat = [FoodInformationDict objectForKey:@"fat_saturated_g"];
                 if([self checkNotNullValue:totalSatFat])
                 {
-                    [mFoodInformation setObject:[self convertMgtoG:totalSatFat] forKey:@"Total Saturated Fat"];
+                    [mFoodInformation setObject:totalSatFat forKey:@"Total Saturated Fat"];
                     [mFoodCaInformation setObject:totalSatFat forKey:@"Total Saturated Fat"];
                 }
                 
                 NSNumber *carbohydrates = [FoodInformationDict objectForKey:@"carbohydrates_total_g"];
                 if([self checkNotNullValue:carbohydrates])
                 {
-                    [mFoodInformation setObject:[self convertMgtoG:carbohydrates] forKey:@"Carbohydrates"];
+                    [mFoodInformation setObject:carbohydrates forKey:@"Carbohydrates"];
 
                     [mFoodCaInformation setObject:carbohydrates forKey:@"Carbohydrates"];
                 }
@@ -77,13 +77,13 @@
                 NSNumber *potassium = [FoodInformationDict objectForKey:@"potassium_mg"];
                 if([self checkNotNullValue:potassium])
                 {
-                    [mFoodInformation setObject:[self convertMgtoG:potassium] forKey:@"Potassium"];
+                    [mFoodInformation setObject:potassium forKey:@"Potassium"];
                 }
 
                 NSNumber *sodium = [FoodInformationDict objectForKey:@"sodium_mg"];
                 if([self checkNotNullValue:sodium])
                 {
-                    [mFoodInformation setObject:[self convertMgtoG:sodium] forKey:@"Sodium"];
+                    [mFoodInformation setObject:sodium forKey:@"Sodium"];
                 }
                 
                 NSNumber *protein = [FoodInformationDict objectForKey:@"protein_g"];
@@ -108,7 +108,7 @@
                 NSNumber *cholesterol = [FoodInformationDict objectForKey:@"cholesterol_mg"];
                 if([self checkNotNullValue:cholesterol])
                 {
-                    [mFoodInformation setObject:[self convertMgtoG:cholesterol] forKey:@"Cholesterol"];
+                    [mFoodInformation setObject:cholesterol forKey:@"Cholesterol"];
                 }
 
 
@@ -124,10 +124,10 @@
     
     [task resume];
 }
--(NSNumber *)convertMgtoG:(NSNumber *)valueMg{
-    double dbvalueG = [valueMg doubleValue]/1000;
-    return [NSNumber numberWithDouble:dbvalueG];
-}
+//-(NSNumber *)convertMgtoG:(NSNumber *)valueMg{
+//    double dbvalueG = [valueMg doubleValue]/1000;
+//    return [NSNumber numberWithDouble:dbvalueG];
+//}
 -(BOOL)checkNotNullValue:(NSNumber *)foodValue{
 
     if ([foodValue compare:@0] == NSOrderedDescending) {
