@@ -26,7 +26,7 @@
     _tfsearch.layer.cornerRadius = 10.0;
     _nutritionTitle.hidden = YES;
     _imgRecipe.hidden= YES;
-
+    _otherFood.hidden = YES;
     //                //not full screen?
 //    _ReciptStepNavigationController.modalPresentationStyle = UIModalPresentationFullScreen;
     _embeddedVC = [self.storyboard instantiateViewControllerWithIdentifier:@"foodPie"];
@@ -132,19 +132,54 @@ _mReciptStepViewController = _ReciptStepNavigationController.childViewController
     });
 
 }
-- (void)FoodConnectionHandler:(FoodConnectionHandler *)handler didFinishTargetFood:(BOOL)success fooddetail:(NSDictionary *)mfoodDetailInfo foodRecipe:(NSMutableArray *)RecipeList{
+- (void)FoodConnectionHandler:(FoodConnectionHandler *)handler didFinishTargetFood:(BOOL)success fooddetail:(NSDictionary *)mfoodDetailInfo foodRecipe:(NSMutableArray *)RecipeList foodOther:(NSDictionary *)foodOther{
 
     if (success) {
+        NSString *finalText = @"";
         if(mfoodDetailInfo.count>0)
         {
             
-            mfoodDetailInfo = mfoodDetailInfo;
+            if(foodOther.count > 0)
+            {
+                _FoodOtherKey = [foodOther allKeys];
+                _FoodOtherValue = [foodOther allValues];
+                
+                
+                for(int i =0;i<_FoodOtherKey.count;i++)
+                {
+                    if(i != (_FoodOtherKey.count-1)){
+                        NSString *title = [_FoodOtherKey objectAtIndex:i];
+                        NSString *value = [_FoodOtherValue objectAtIndex:i];
+                        NSString *combine;
+                        combine = [NSString stringWithFormat:@"%@ : %@ gram \n", title, value];
+                        finalText = [NSString stringWithFormat:@"%@ %@", finalText, combine];
+                    }else{
+                        //last object
+                        if(i != (_FoodOtherKey.count-1)){
+                            NSString *title = [_FoodOtherKey objectAtIndex:i];
+                            NSString *value = [_FoodOtherValue objectAtIndex:i];
+                            NSString *combine;
+                            combine = [NSString stringWithFormat:@"%@ : %@", title, value];
+                            finalText = [NSString stringWithFormat:@"%@ %@", finalText, combine];
+                        }
+                    }
+                    
+                }
+            }
+            
             _FoodKey = [mfoodDetailInfo allKeys];
             _FoodValue = [mfoodDetailInfo allValues];
             _RecipeList = [[NSMutableArray alloc]init];
             _RecipeList = RecipeList;
-         
+            
             dispatch_async(dispatch_get_main_queue(), ^{
+                if(foodOther.count > 0)
+                {
+                    self->_otherFood.hidden = NO;
+                    [self->_otherFood setText:finalText];
+                }else{
+                    self->_otherFood.hidden = YES;
+                }
                 _embeddedVC.view.hidden = NO;
                 [self.loadingProgressView stopAnimating];
                 if(self->_RecipeList.count > 0)
@@ -154,23 +189,22 @@ _mReciptStepViewController = _ReciptStepNavigationController.childViewController
                         // Code to execute after delay
                         
                         self->_imgRecipe.hidden= NO;
-
-
+                        
+                        
                     });
-
+                    
                 }else{
                     self->_imgRecipe.hidden= YES;
                 }
-//                [self->_tbFoodDetail reloadData];
-//                [self->_tbFoodDetail setHidden:NO];
-//                [self -> _imgEmpty setHidden:YES];
-                   [self.containerView setHidden:NO];
+                //                [self->_tbFoodDetail reloadData];
+                //                [self->_tbFoodDetail setHidden:NO];
+                //                [self -> _imgEmpty setHidden:YES];
+                [self.containerView setHidden:NO];
                 self->_embeddedVC.FoodKey =self->_FoodKey;
                 self->_embeddedVC.FoodValue =self->_FoodValue;
                 [self->_embeddedVC initWithChartType];
-           
+                
             });
-            
             
         }
     }else{

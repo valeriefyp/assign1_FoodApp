@@ -63,7 +63,7 @@
         [subviewToRemove removeFromSuperview];
     }
    
-    _chart = [[PieChart alloc] initWithFrame:CGRectMake(0, header_height, WIDTH(self.view), (HEIGHT(self.view) - header_height)/2)];
+    _chart = [[PieChart alloc] initWithFrame:CGRectMake(0, header_height, WIDTH(self.view), (550 - header_height)/2)];
     _chart.tag = 123;
     [_chart setDataSource:self];
     [_chart setDelegate:self];

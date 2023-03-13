@@ -29,7 +29,7 @@
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if(error != nil || error.code == NSURLErrorTimedOut)
         {
-            [self->_delegate FoodConnectionHandler:self didFinishTargetFood:NO fooddetail:nil foodRecipe:nil];
+            [self->_delegate FoodConnectionHandler:self didFinishTargetFood:NO fooddetail:nil foodRecipe:nil foodOther:nil];
         }else if ([data length] > 0 && error == nil) {
             
             // success case:
@@ -41,30 +41,36 @@
                 NSMutableArray *recipetList =  [self getRecipeList:FoodReceiptArray];
 //                NSMutableArray *mFoodInformation;
                 NSMutableDictionary *mFoodInformation = [[NSMutableDictionary alloc]init];
+                NSMutableDictionary *mFoodCaInformation = [[NSMutableDictionary alloc]init];
+
                 //filter the food nutrition <--no need for loop
-//  
-//                NSNumber *calories = [FoodInformationDict objectForKey:@"calories"];
-//                if([self checkNotNullValue:calories])
-//                {
-//                    [mFoodInformation setObject:calories forKey:@"Calories"];
-//                }
+  
+                NSNumber *calories = [FoodInformationDict objectForKey:@"calories"];
+                if([self checkNotNullValue:calories])
+                {
+                    [mFoodInformation setObject:calories forKey:@"Calories"];
+                }
 //                
                 NSNumber *totalFat = [FoodInformationDict objectForKey:@"fat_total_g"];
                 if([self checkNotNullValue:totalFat])
                 {
                     [mFoodInformation setObject:totalFat forKey:@"Total Fat"];
+                    [mFoodCaInformation setObject:totalFat forKey:@"Total Fat"];
                 }
                 
                 NSNumber *totalSatFat = [FoodInformationDict objectForKey:@"fat_saturated_g"];
                 if([self checkNotNullValue:totalSatFat])
                 {
-                    [mFoodInformation setObject:totalSatFat forKey:@"Total Saturated Fat"];
+                    [mFoodInformation setObject:[self convertMgtoG:totalSatFat] forKey:@"Total Saturated Fat"];
+                    [mFoodCaInformation setObject:totalSatFat forKey:@"Total Saturated Fat"];
                 }
                 
                 NSNumber *carbohydrates = [FoodInformationDict objectForKey:@"carbohydrates_total_g"];
                 if([self checkNotNullValue:carbohydrates])
                 {
-                    [mFoodInformation setObject:carbohydrates forKey:@"Carbohydrates"];
+                    [mFoodInformation setObject:[self convertMgtoG:carbohydrates] forKey:@"Carbohydrates"];
+
+                    [mFoodCaInformation setObject:carbohydrates forKey:@"Carbohydrates"];
                 }
                 
                 
@@ -73,7 +79,7 @@
                 {
                     [mFoodInformation setObject:[self convertMgtoG:potassium] forKey:@"Potassium"];
                 }
-                
+
                 NSNumber *sodium = [FoodInformationDict objectForKey:@"sodium_mg"];
                 if([self checkNotNullValue:sodium])
                 {
@@ -84,6 +90,7 @@
                 if([self checkNotNullValue:protein])
                 {
                     [mFoodInformation setValue:protein forKey:@"Protein"];
+                    [mFoodCaInformation setValue:protein forKey:@"Protein"];
                 }
                 
                 NSNumber *sugar = [FoodInformationDict objectForKey:@"sugar_g"];
@@ -91,26 +98,26 @@
                 {
                     [mFoodInformation setObject:sugar forKey:@"Sugar"];
                 }
-                
+
                 NSNumber *fiber = [FoodInformationDict objectForKey:@"fiber_g"];
                 if([self checkNotNullValue:fiber])
                 {
                     [mFoodInformation setObject:fiber forKey:@"Fiber"];
                 }
-                
+
                 NSNumber *cholesterol = [FoodInformationDict objectForKey:@"cholesterol_mg"];
                 if([self checkNotNullValue:cholesterol])
                 {
                     [mFoodInformation setObject:[self convertMgtoG:cholesterol] forKey:@"Cholesterol"];
                 }
-       
 
-               [self->_delegate FoodConnectionHandler:self didFinishTargetFood:YES fooddetail:mFoodInformation foodRecipe:recipetList];
+
+                [self->_delegate FoodConnectionHandler:self didFinishTargetFood:YES fooddetail:mFoodCaInformation foodRecipe:recipetList foodOther:mFoodInformation];
 
             }
             @catch (NSException * __unused exception) { }
         }else{
-            [self->_delegate FoodConnectionHandler:self didFinishTargetFood:NO fooddetail:nil foodRecipe:nil];
+            [self->_delegate FoodConnectionHandler:self didFinishTargetFood:NO fooddetail:nil foodRecipe:nil foodOther:nil];
         }
     
     }];

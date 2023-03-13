@@ -12,7 +12,7 @@
 @protocol FoodConnectionDelegate <NSObject>
 
 @optional
-- (void)FoodConnectionHandler:(FoodConnectionHandler *)handler didFinishTargetFood:(BOOL)success fooddetail:(NSDictionary *)foodDetailInfo foodRecipe:(NSMutableArray *)RecipeList;
+- (void)FoodConnectionHandler:(FoodConnectionHandler *)handler didFinishTargetFood:(BOOL)success fooddetail:(NSDictionary *)foodDetailInfo foodRecipe:(NSMutableArray *)RecipeList foodOther:(NSDictionary *)foodOther;
 - (void)FoodConnectionHandler:(FoodConnectionHandler *)handler didFinishRecipeDetail:(BOOL)success foodRecipe:(NSArray *)foodRecipe;
 //- (void)BusConnectionHandler:(BusConnectionHandler *)handler didFinishGetAllCTBRoute:(BOOL)success;
 //- (void)BusConnectionHandler:(BusConnectionHandler *)handler didFinishGetAllNWFBRoute:(BOOL)success;

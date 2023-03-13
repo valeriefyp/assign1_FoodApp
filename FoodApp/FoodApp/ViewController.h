@@ -31,8 +31,11 @@
 @property NSString *targetFood;
 @property (strong, nonatomic) NSArray *FoodKey;
 @property (strong, nonatomic) NSArray *FoodValue;
+@property (strong, nonatomic) NSArray *FoodOtherKey;
+@property (strong, nonatomic) NSArray *FoodOtherValue;
 @property (strong, nonatomic) foodPie *embeddedVC;
 @property (strong, nonatomic) ReciptStepNavigationController *ReciptStepNavigationController;
 @property (strong, nonatomic)  ReciptStepViewController *mReciptStepViewController;
+@property (weak, nonatomic) IBOutlet UITextView *otherFood;
 
 @end
