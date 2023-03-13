@@ -56,14 +56,19 @@
                 {
                     [mFoodInformation setObject:totalFat forKey:@"Total Fat"];
                     [mFoodCaInformation setObject:totalFat forKey:@"Total Fat"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Total Fat"];
                 }
+
                 
                 NSNumber *totalSatFat = [FoodInformationDict objectForKey:@"fat_saturated_g"];
                 if([self checkNotNullValue:totalSatFat])
                 {
                     [mFoodInformation setObject:totalSatFat forKey:@"Total Saturated Fat"];
-                    [mFoodCaInformation setObject:totalSatFat forKey:@"Total Saturated Fat"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Total Saturated Fat"];
                 }
+
                 
                 NSNumber *carbohydrates = [FoodInformationDict objectForKey:@"carbohydrates_total_g"];
                 if([self checkNotNullValue:carbohydrates])
@@ -71,19 +76,25 @@
                     [mFoodInformation setObject:carbohydrates forKey:@"Carbohydrates"];
 
                     [mFoodCaInformation setObject:carbohydrates forKey:@"Carbohydrates"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Carbohydrates"];
                 }
-                
+
                 
                 NSNumber *potassium = [FoodInformationDict objectForKey:@"potassium_mg"];
                 if([self checkNotNullValue:potassium])
                 {
                     [mFoodInformation setObject:potassium forKey:@"Potassium"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Potassium"];
                 }
 
                 NSNumber *sodium = [FoodInformationDict objectForKey:@"sodium_mg"];
                 if([self checkNotNullValue:sodium])
                 {
                     [mFoodInformation setObject:sodium forKey:@"Sodium"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Sodium"];
                 }
                 
                 NSNumber *protein = [FoodInformationDict objectForKey:@"protein_g"];
@@ -91,24 +102,33 @@
                 {
                     [mFoodInformation setValue:protein forKey:@"Protein"];
                     [mFoodCaInformation setValue:protein forKey:@"Protein"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Protein"];
                 }
                 
                 NSNumber *sugar = [FoodInformationDict objectForKey:@"sugar_g"];
                 if([self checkNotNullValue:sugar])
                 {
                     [mFoodInformation setObject:sugar forKey:@"Sugar"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Sugar"];
                 }
 
                 NSNumber *fiber = [FoodInformationDict objectForKey:@"fiber_g"];
                 if([self checkNotNullValue:fiber])
                 {
                     [mFoodInformation setObject:fiber forKey:@"Fiber"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Fiber"];
                 }
+
 
                 NSNumber *cholesterol = [FoodInformationDict objectForKey:@"cholesterol_mg"];
                 if([self checkNotNullValue:cholesterol])
                 {
                     [mFoodInformation setObject:cholesterol forKey:@"Cholesterol"];
+                }else{
+                    [mFoodInformation setObject:@0 forKey:@"Cholesterol"];
                 }
 
 

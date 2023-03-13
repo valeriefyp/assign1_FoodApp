@@ -63,6 +63,8 @@
     // show food detail
     self->_tbFoodDetail.hidden = YES;
     self->_embeddedVC.view.hidden = NO;
+    self->_otherFood.hidden = NO;
+
 }
 
 - (void)showRecipe:(UITapGestureRecognizer *)tapGesture {
@@ -70,7 +72,7 @@
     self->_tbFoodDetail.hidden = NO;
     [_tbFoodDetail reloadData];
     self->_embeddedVC.view.hidden = YES;
-
+    self->_otherFood.hidden = YES;
 
 }
 
@@ -161,8 +163,7 @@ _mReciptStepViewController = _ReciptStepNavigationController.childViewController
                         }
                         finalText = [NSString stringWithFormat:@"%@ %@", finalText, combine];
                     }else{
-                        //last object
-                        if(i != (_FoodOtherKey.count-1)){
+                
                             NSString *title = [_FoodOtherKey objectAtIndex:i];
                             NSString *value = [_FoodOtherValue objectAtIndex:i];
                             NSString *combine;
@@ -175,7 +176,7 @@ _mReciptStepViewController = _ReciptStepNavigationController.childViewController
                                 combine = [NSString stringWithFormat:@"%@ : %@ g  ", title, value];
                             }
                             finalText = [NSString stringWithFormat:@"%@ %@", finalText, combine];
-                        }
+            
                     }
                     
                 }
