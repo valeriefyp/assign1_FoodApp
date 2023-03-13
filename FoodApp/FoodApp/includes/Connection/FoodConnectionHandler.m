@@ -42,13 +42,13 @@
 //                NSMutableArray *mFoodInformation;
                 NSMutableDictionary *mFoodInformation = [[NSMutableDictionary alloc]init];
                 //filter the food nutrition <--no need for loop
-  
-                NSNumber *calories = [FoodInformationDict objectForKey:@"calories"];
-                if([self checkNotNullValue:calories])
-                {
-                    [mFoodInformation setObject:calories forKey:@"Calories"];
-                }
-                
+//  
+//                NSNumber *calories = [FoodInformationDict objectForKey:@"calories"];
+//                if([self checkNotNullValue:calories])
+//                {
+//                    [mFoodInformation setObject:calories forKey:@"Calories"];
+//                }
+//                
                 NSNumber *totalFat = [FoodInformationDict objectForKey:@"fat_total_g"];
                 if([self checkNotNullValue:totalFat])
                 {
